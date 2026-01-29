@@ -6,7 +6,7 @@ const initialState = {
 }
 
 const authSlice = createSlice({
-    name: "auth",
+    name: "auth",  // name of the slice and used while accessing the state from the slice.
     initialState,
     reducers: {
         login: (state, action) => {
