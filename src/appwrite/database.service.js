@@ -89,5 +89,5 @@ export class DatabaseService {
     }
 }
 
-export const databaseService = new DatabaseService()
+const databaseService = new DatabaseService()
 export default databaseService;
