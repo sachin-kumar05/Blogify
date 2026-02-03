@@ -12,14 +12,15 @@ function Signup() {
   const [error, setError] = useState("")
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { register, handleSubmit } = useForm
+  const { register, handleSubmit } = useForm()
 
   const create = async(data) => {
     setError("")
     try {
-      const userData = await authService.createAccount(data)
-      if(userData) {
+      const session = await authService.createAccount(data)
+      if(session) {
         const userData = await authService.getCurrentUser()
+        console.log("dispatching login with user:", userData);   // cheking error
         if(userData) dispatch(login(userData))
         navigate("/")
       }
@@ -48,11 +49,11 @@ function Signup() {
                 </p>
                 {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
 
-              <form onClick={handleSubmit(create)}>
+              <form onSubmit={handleSubmit(create)}>
                 <div className='space-y-5'>
 
                   <Input 
-                    label="fullName: "
+                    label="fullName:"
                     type="text"
                     placeholder="Enter your fullname"
                     {...register("name", {
@@ -61,7 +62,7 @@ function Signup() {
                   />
 
                   <Input 
-                    label="Email: "
+                    label="Email:"
                     type="email"
                     placeholder="Enter your email"
                     {...register("email", {
@@ -74,7 +75,7 @@ function Signup() {
 
                   <Input 
                     label="password"
-                    type="passwor"
+                    type="password"
                     placeholder="Enter your password"
                     {...register("password", {
                       required: true,
