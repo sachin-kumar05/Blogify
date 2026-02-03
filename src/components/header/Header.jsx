@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 function Header() {
 
   const authStatus = useSelector((state) => state.auth.status)
+  console.log(authStatus)   // checking error
   const navigate = useNavigate()
 
   // Here we have create list of nav items so that we don't have to create button multiple times manually for each nav item
@@ -46,7 +47,7 @@ function Header() {
       <Container>
         <nav className='flex'>
           <div className='mr-4'>
-            <Link>
+            <Link to='/'>
               <Logo width='70px' />
             </Link>
           </div>
@@ -56,7 +57,7 @@ function Header() {
                 // use key in html tag while looping on list in react
                 <li key={item.name}>  
                   <button
-                    className='inline-block px-6 py-2 duration-200 hover: bg-blue-100 rounded-full'
+                    className='inline-block px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
                     onClick={() => navigate(item.slug)}
                   >{item.name}</button>
                 </li>
