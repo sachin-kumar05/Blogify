@@ -23,12 +23,13 @@ export class AuthService {
             })
 
             if(userAccount) {
-                this.login({email, password})
+                return await this.login({email, password})
             } else {
                 return userAccount;
             }
         } catch (error) {
             console.error('Appwrite signup failed:', error)
+            throw error
         }
     }
 
@@ -40,12 +41,13 @@ export class AuthService {
             })
         } catch (error) {
             console.log("Appwrite login failed:", error)
+            throw error
         }
     }
 
     async getCurrentUser() {
         try {
-            return await this.account.get();
+            await this.account.get();
         } catch (error) {
             console.log("Appwrite getCurrentUser failed:", error)
         }
