@@ -6,7 +6,7 @@ import storageService from '../../appwrite/storage.service'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-function PostForm({post}) {
+function PostForm({ post }) {
 
   const {register, handleSubmit, watch, setValue, getValues, control} = useForm({
     defaultValues: {
@@ -18,7 +18,8 @@ function PostForm({post}) {
   })
 
   const navigate = useNavigate()
-  const userData = useSelector(state => state.auth.userData)
+  const userData = useSelector((state) => state.auth.userData)
+  console.log(userData)   // to check error
 
   const submit = async(data) => {
     if(post) {
@@ -39,14 +40,15 @@ function PostForm({post}) {
     } else {
         const file = data.image[0] ? await storageService.uploadFile(data.image[0]) : null
 
-        if(!file) {
-            console.log("Image file is required")
-            // TODO: write the correct route to redirect
-            navigate("/post")
-        }
+        // if(!file) {
+        //     console.log("Image file is required")
+        //     // TODO: write the correct route to redirect
+        //     navigate("/all-posts")
+        // }
 
         if(file) {
-            data.featuredImage = file.$id
+            const fileId = file.$id;
+            data.featuredImage = fileId
 
             const dbPost = await databaseService.createPost({
                 ...data,
