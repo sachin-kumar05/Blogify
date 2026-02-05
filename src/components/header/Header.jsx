@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux'
 function Header() {
 
   const authStatus = useSelector((state) => state.auth.status)
-  console.log(authStatus)   // checking error
   const navigate = useNavigate()
 
   // Here we have create list of nav items so that we don't have to create button multiple times manually for each nav item
