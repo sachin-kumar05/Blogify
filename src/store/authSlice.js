@@ -10,7 +10,6 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         login: (state, action) => {
-            console.log("REDUX LOGIN PAYLOAD:", action.payload);     // cheking error
             state.status = true
             state.userData = action.payload.userData;
         },
